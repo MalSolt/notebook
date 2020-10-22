@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/notebook/static/css/main.09c7fc8d.chunk.css",
+    "main.js": "/notebook/static/js/main.f8c9157f.chunk.js",
+    "main.js.map": "/notebook/static/js/main.f8c9157f.chunk.js.map",
+    "runtime-main.js": "/notebook/static/js/runtime-main.fdcc326c.js",
+    "runtime-main.js.map": "/notebook/static/js/runtime-main.fdcc326c.js.map",
+    "static/js/2.ca6d83fb.chunk.js": "/notebook/static/js/2.ca6d83fb.chunk.js",
+    "static/js/2.ca6d83fb.chunk.js.map": "/notebook/static/js/2.ca6d83fb.chunk.js.map",
+    "index.html": "/notebook/index.html",
+    "precache-manifest.0e4190179087f19b4970f55e26de3fb4.js": "/notebook/precache-manifest.0e4190179087f19b4970f55e26de3fb4.js",
+    "service-worker.js": "/notebook/service-worker.js",
+    "static/css/main.09c7fc8d.chunk.css.map": "/notebook/static/css/main.09c7fc8d.chunk.css.map",
+    "static/js/2.ca6d83fb.chunk.js.LICENSE.txt": "/notebook/static/js/2.ca6d83fb.chunk.js.LICENSE.txt",
+    "static/media/arrow.svg": "/notebook/static/media/arrow.7761680a.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fdcc326c.js",
+    "static/js/2.ca6d83fb.chunk.js",
+    "static/css/main.09c7fc8d.chunk.css",
+    "static/js/main.f8c9157f.chunk.js"
+  ]
+}
