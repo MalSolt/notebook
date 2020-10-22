@@ -1,0 +1,25 @@
+.page {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  margin-bottom: 20px;
+  color: #343a40;
+  border-radius: 5px;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  font-size: 30px;
+  .buttons {
+    text-align: right;
+  }
+  span {
+    @media (max-width: 500px) {
+      padding-top: 0;
+      font-size: 20px;
+    }
+    word-break: break-word;
+  }
+  @media (max-width: 500px) {
+    padding-top: 0;
+  }
+}
