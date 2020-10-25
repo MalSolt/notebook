@@ -11,12 +11,15 @@
   font-size: 30px;
   .buttons {
     text-align: right;
+    margin-left: 2px;
+    flex-grow: 1;
+    flex-basis: 0;
   }
   span {
     @media (max-width: 500px) {
-      padding-top: 0;
       font-size: 20px;
     }
+    line-height: 1;
     word-break: break-word;
   }
   @media (max-width: 500px) {

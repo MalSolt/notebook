@@ -29,7 +29,11 @@ function App() {
       }, 3000)
       setShowAlert(true)
       if (e.target.value.trim()) {
-        if (Object.keys(state).filter(pageName => pageName === e.target.value.trim()).length) {
+        if (
+          Object.keys(state).filter(
+            pageName => pageName.toLowerCase() === e.target.value.replace(/ +/g, " ").trim().toLowerCase()
+          ).length
+        ) {
           setAlertContent({ type: "warning", title: "such page already exists" })
         } else {
           setState({ [e.target.value.trim()]: [], ...state })
@@ -104,7 +108,9 @@ function App() {
           <span className="navbar-brand" href="#">
             <span className="logo">NOTEBOOK</span>
           </span>
-          <button className="btn btn-light ml-auto" onClick={() => {setShowAddPage(true)}}>+ Add page</button>
+          <button className="btn btn-light ml-auto" onClick={() => setShowAddPage(true)}>
+            + Add page
+          </button>
         </div>
       </nav>
       <CSSTransition in={showAlert} timeout={500} classNames="alert" mountOnEnter unmountOnExit>

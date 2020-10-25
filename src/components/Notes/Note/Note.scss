@@ -2,12 +2,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  div {
+  .note-content {
     display: flex;
     align-items: center;
+    s,
+    span {
+      word-break: break-word;
+    }
   }
-  s,
-  span {
-    word-break: break-word;
+  .btn-outline-danger {
+    margin-left: 2px;
   }
 }
