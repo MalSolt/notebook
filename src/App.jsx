@@ -1,6 +1,5 @@
-import { logDOM } from "@testing-library/react"
 import React, { useEffect, useState } from "react"
-import { NavLink, Route, Switch, useHistory } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 import { CSSTransition } from "react-transition-group"
 import "./App.scss"
 import { AddPage } from "./components/AddPage/AddPage"
@@ -15,7 +14,6 @@ function App() {
     type: "success",
     title: "Page was created",
   })
-  const history = useHistory()
   const [state, setState] = useState(JSON.parse(localStorage.getItem("state")) || {})
   useEffect(() => {
     localStorage.setItem("state", JSON.stringify(state))
@@ -101,6 +99,20 @@ function App() {
     })
   }
 
+  const moveNote = (fromPage, toPage, noteId) => {
+    clearInterval(hideAlert)
+    hideAlert = setTimeout(() => {
+      setShowAlert(false)
+    }, 3000)
+    setShowAlert(true)
+    setState({
+      ...state,
+      [toPage]: [...state[fromPage].filter(note => note.id === noteId), ...state[toPage]],
+      [fromPage]: state[fromPage].filter(note => note.id !== noteId),
+    })
+    setAlertContent({ type: "success", title: `Note moved to "${toPage}"` })
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -144,9 +156,16 @@ function App() {
           return (
             <Route key={page} exact path={`/${page}`}>
               {({ match }) => (
-                <CSSTransition timeout={700} classNames="item" in={match != null} unmountOnExit>
+                <CSSTransition timeout={700} classNames="page" in={match != null} unmountOnExit>
                   <div className="absolute">
-                    <Notes addNote={addNote} state={state} page={page} removeNote={removeNote} toggleDone={toggleDone} />
+                    <Notes
+                      moveNote={moveNote}
+                      addNote={addNote}
+                      state={state}
+                      page={page}
+                      removeNote={removeNote}
+                      toggleDone={toggleDone}
+                    />
                   </div>
                 </CSSTransition>
               )}

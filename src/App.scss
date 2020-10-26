@@ -52,20 +52,20 @@ h2 {
   }
 }
 
-.item-enter {
+.page-enter {
   opacity: 0;
 }
-.item-enter-active {
+.page-enter-active {
   opacity: 1;
   animation: showRoute 700ms forwards;
   @media (max-width: 1024px) {
     animation: showRouteMobile 700ms forwards;
   }
 }
-.item-exit {
+.page-exit {
   opacity: 0;
 }
-.item-exit-active {
+.page-exit-active {
   opacity: 0;
 }
 

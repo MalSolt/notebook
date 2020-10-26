@@ -13,4 +13,47 @@
   .btn-outline-danger {
     margin-left: 2px;
   }
+  .buttons {
+    flex-basis: 0;
+    flex-grow: 1;
+    text-align: right;
+  }
+  button {
+    margin-top: 1px;
+  }
+  .dropdownToggle {
+    position: relative;
+    margin-left: 2px;
+    img {
+      width: 10px;
+      transform: rotate(-90deg);
+    }
+    .dropdown {
+      word-break: break-word;
+      color: rgb(238, 238, 238);
+      text-align: left;
+      width: 120px;
+      background-color: #4c545c;
+      position: absolute;
+      top: 31px;
+      right: 0px;
+      padding: 5px;
+      z-index: 10;
+      border-radius: 4px;
+      h6 {
+        text-align: center;
+        color: aqua;
+      }
+      .dropdownItem {
+        line-height: 1.4;
+        display: flex;
+        &:hover {
+          color: rgb(179, 179, 179);
+        }
+        &:active {
+          color: rgb(117, 117, 117);
+        }
+      }
+    }
+  }
 }

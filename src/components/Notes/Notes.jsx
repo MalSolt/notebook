@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 import { Note } from "./Note/Note"
 import Arrow from "../../img/arrow.svg"
 
-export const Notes = ({ addNote, state, page, removeNote, toggleDone }) => {
+export const Notes = ({ moveNote, addNote, state, page, removeNote, toggleDone }) => {
   return (
     <div className="notes">
       <div className="page-heiding">
@@ -12,18 +12,15 @@ export const Notes = ({ addNote, state, page, removeNote, toggleDone }) => {
         </NavLink>
         <h2 className="text-right">{page}</h2>
       </div>
-      <input
-        type="text"
-        placeholder="Enter a note"
-        className="form-control"
-        onKeyDown={e => addNote(e, page)}
-      />
+      <input type="text" placeholder="Enter a note" className="form-control" onKeyDown={e => addNote(e, page)} />
       <hr></hr>
       <ul className="list-group">
         {state[page].length ? (
           state[page].map(note => {
             return (
               <Note
+                moveNote={moveNote}
+                allPages={Object.keys(state)}
                 pageName={page}
                 key={note.id}
                 id={note.id}
