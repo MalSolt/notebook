@@ -5,20 +5,21 @@ import Edit from "../../../img/edit.svg"
 
 export const Note = ({ changeNote, moveNote, allPages, pageName, id, title, done, removeNote, toggleDone }) => {
   const [showDropdown, setShowDropdown] = useState(false)
-  const [editTitleMode, setEditTitleMode] = useState(false)
+  const [titleEditMode, setTitleEditMode] = useState(false)
   return (
     <li className="list-group-item">
-      {editTitleMode ? (
+      {titleEditMode ? (
         <input
           onKeyDown={e => {
             if (e.key === "Enter") {
               changeNote(e, pageName, id)
-              setEditTitleMode(false)
+              setTitleEditMode(false)
             }
           }}
           autoFocus
           className="form-control"
           defaultValue={title}
+          onBlur={() => setTitleEditMode(false)}
         />
       ) : (
         <>
@@ -27,7 +28,7 @@ export const Note = ({ changeNote, moveNote, allPages, pageName, id, title, done
             &nbsp;&nbsp;
             {done ? <s>{title}</s> : <span>{title}</span>}
             &nbsp;
-            <img onClick={() => setEditTitleMode(!editTitleMode)} className="edit" src={Edit} alt="" />
+            <img onClick={() => setTitleEditMode(!titleEditMode)} className="edit" src={Edit} alt="" />
           </div>
           <div className="buttons">
             <button onClick={e => removeNote(e, pageName, id)} className="btn btn-outline-danger btn-sm">
