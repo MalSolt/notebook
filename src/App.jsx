@@ -28,9 +28,7 @@ function App() {
       setShowAlert(true)
       if (e.target.value.trim()) {
         if (
-          Object.keys(state).filter(
-            pageName => pageName.toLowerCase() === e.target.value.replace(/ +/g, " ").trim().toLowerCase()
-          ).length
+          Object.keys(state).some(pageName => pageName.toLowerCase() === e.target.value.replace(/ +/g, " ").trim().toLowerCase())
         ) {
           setAlertContent({ type: "warning", title: "such page already exists" })
         } else {
@@ -90,15 +88,6 @@ function App() {
     setAlertContent({ type: "danger", title: "Note deleted" })
   }
 
-  const toggleDone = (pageName, id) => {
-    setState({
-      ...state,
-      [pageName]: state[pageName].map(note => {
-        return note.id === id ? { ...note, done: !note.done } : note
-      }),
-    })
-  }
-
   const moveNote = (fromPage, toPage, noteId) => {
     clearInterval(hideAlert)
     hideAlert = setTimeout(() => {
@@ -111,6 +100,35 @@ function App() {
       [fromPage]: state[fromPage].filter(note => note.id !== noteId),
     })
     setAlertContent({ type: "success", title: `Note moved to "${toPage}"` })
+  }
+
+  const changeNote = (e, pageName, noteId) => {
+    clearInterval(hideAlert)
+    hideAlert = setTimeout(() => {
+      setShowAlert(false)
+    }, 3000)
+    setShowAlert(true)
+
+    if (e.target.value.trim()) {
+      setState({
+        ...state,
+        [pageName]: state[pageName].map(note => {
+          return note.id === noteId ? { ...note, title: e.target.value.trim() } : note
+        }),
+      })
+      setAlertContent({ type: "success", title: "Note changed" })
+    } else {
+      setAlertContent({ type: "warning", title: "Enter note title" })
+    }
+  }
+
+  const toggleDone = (pageName, id) => {
+    setState({
+      ...state,
+      [pageName]: state[pageName].map(note => {
+        return note.id === id ? { ...note, done: !note.done } : note
+      }),
+    })
   }
 
   return (
@@ -159,9 +177,11 @@ function App() {
                 <CSSTransition timeout={700} classNames="page" in={match != null} unmountOnExit>
                   <div className="absolute">
                     <Notes
+                      changeNote={changeNote}
+                      state={state}
                       moveNote={moveNote}
                       addNote={addNote}
-                      state={state}
+                      allPages={Object.keys(state)}
                       page={page}
                       removeNote={removeNote}
                       toggleDone={toggleDone}

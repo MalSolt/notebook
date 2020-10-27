@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 import { Note } from "./Note/Note"
 import Arrow from "../../img/arrow.svg"
 
-export const Notes = ({ moveNote, addNote, state, page, removeNote, toggleDone }) => {
+export const Notes = ({changeNote, state, moveNote, addNote, allPages, page, removeNote, toggleDone }) => {
   return (
     <div className="notes">
       <div className="page-heiding">
@@ -19,8 +19,9 @@ export const Notes = ({ moveNote, addNote, state, page, removeNote, toggleDone }
           state[page].map(note => {
             return (
               <Note
+                changeNote={changeNote}
                 moveNote={moveNote}
-                allPages={Object.keys(state)}
+                allPages={allPages}
                 pageName={page}
                 key={note.id}
                 id={note.id}

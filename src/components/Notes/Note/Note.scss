@@ -5,9 +5,14 @@
   .note-content {
     display: flex;
     align-items: center;
+    box-sizing: border-box;
     s,
     span {
       word-break: break-word;
+    }
+    .edit {
+      width: 15px;
+      cursor: pointer;
     }
   }
   .btn-outline-danger {
@@ -29,6 +34,7 @@
       transform: rotate(-90deg);
     }
     .dropdown {
+      box-shadow: 0 0 5px #fff;
       word-break: break-word;
       color: rgb(238, 238, 238);
       text-align: left;
