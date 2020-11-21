@@ -1,16 +1,16 @@
-import React from "react"
-import { NavLink } from "react-router-dom"
-import "./Page.scss"
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import './Page.scss'
 
-export const Page = ({ pageName, removePage }) => {
+export const Page = ({ pageName, removePageHandler }) => {
   return (
-    <div className="container page">
+    <div className='container page'>
       <span>{pageName}</span>
-      <div className="buttons">
-        <NavLink to={pageName} className="btn btn-dark mr-1">
+      <div className='buttons'>
+        <NavLink to={pageName} className='btn btn-dark mr-1'>
           Open
         </NavLink>
-        <button onClick={() => removePage(pageName)} className="btn btn-danger">
+        <button onClick={() => removePageHandler(pageName)} className='btn btn-danger'>
           delete
         </button>
       </div>

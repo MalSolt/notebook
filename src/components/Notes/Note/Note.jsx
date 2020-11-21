@@ -1,59 +1,48 @@
-import React, { useState } from "react"
-import "./Note.scss"
-import Arrow from "../../../img/arrow.svg"
-import Edit from "../../../img/edit.svg"
+import React, { useState } from 'react'
+import './Note.scss'
+import Arrow from '../../../img/arrow.svg'
+import Edit from '../../../img/edit.svg'
+import { useDispatch } from 'react-redux'
+import { toggleDone } from '../../../redux/reducer'
+import { Dropdown } from './Dropdown'
+import { TitleEditMode } from './TitleEditMode'
 
-export const Note = ({ changeNote, moveNote, allPages, pageName, id, title, done, removeNote, toggleDone }) => {
+export const Note = ({ changeNoteHandler, moveNoteHandler, allPages, pageName, noteId, title, done, removeNoteHandler }) => {
+  const dispatch = useDispatch()
   const [showDropdown, setShowDropdown] = useState(false)
   const [titleEditMode, setTitleEditMode] = useState(false)
   return (
-    <li className="list-group-item">
+    <li className='list-group-item'>
       {titleEditMode ? (
-        <input
-          onKeyDown={e => {
-            if (e.key === "Enter") {
-              changeNote(e, pageName, id)
-              setTitleEditMode(false)
-            }
-          }}
-          autoFocus
-          className="form-control"
-          defaultValue={title}
-          onBlur={() => setTitleEditMode(false)}
+        <TitleEditMode
+          changeNoteHandler={changeNoteHandler}
+          setTitleEditMode={setTitleEditMode}
+          pageName={pageName}
+          noteId={noteId}
+          title={title}
         />
       ) : (
         <>
-          <div className="note-content">
-            <input type="checkbox" readOnly checked={done} onClick={() => toggleDone(pageName, id)} />
+          <div className='note-content'>
+            <input type='checkbox' readOnly checked={done} onClick={() => dispatch(toggleDone({ pageName, noteId }))} />
             &nbsp;&nbsp;
-            {done ? <s>{title}</s> : <span>{title}</span>}
+            <span>{title}</span>
             &nbsp;
-            <img onClick={() => setTitleEditMode(!titleEditMode)} className="edit" src={Edit} alt="" />
+            <img onClick={() => setTitleEditMode(!titleEditMode)} className='edit' src={Edit} alt='' />
           </div>
-          <div className="buttons">
-            <button onClick={e => removeNote(e, pageName, id)} className="btn btn-outline-danger btn-sm">
+          <div className='buttons'>
+            <button onClick={e => removeNoteHandler(pageName, noteId)} className='btn btn-outline-danger btn-sm'>
               &times;
             </button>
-            <button onClick={() => setShowDropdown(!showDropdown)} className="btn btn-primary btn-sm dropdownToggle">
-              <img src={Arrow} alt=":" />
-              {showDropdown && (
-                <div className="dropdown">
-                  <h6>Where to move?</h6>
-                  {allPages.length > 1 ? (
-                    allPages
-                      .filter(page => page !== pageName)
-                      .map(page => {
-                        return (
-                          <div className="dropdownItem" onClick={() => moveNote(pageName, page, id)}>
-                            <span>-</span>&nbsp;<span>{page}</span>
-                          </div>
-                        )
-                      })
-                  ) : (
-                    <div className="text-center">No other pages</div>
-                  )}
-                </div>
-              )}
+            <button onClick={() => setShowDropdown(!showDropdown)} className='btn btn-primary btn-sm dropdownToggle'>
+              <img src={Arrow} alt=':' />
+              <Dropdown
+                moveNoteHandler={moveNoteHandler}
+                showDropdown={showDropdown}
+                allPages={allPages}
+                pageName={pageName}
+                noteId={noteId}
+              />
             </button>
           </div>
         </>

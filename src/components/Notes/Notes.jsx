@@ -1,39 +1,38 @@
-import React from "react"
-import { NavLink } from "react-router-dom"
-import { Note } from "./Note/Note"
-import Arrow from "../../img/arrow.svg"
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import { Note } from './Note/Note'
+import Arrow from '../../img/arrow.svg'
 
-export const Notes = ({changeNote, state, moveNote, addNote, allPages, page, removeNote, toggleDone }) => {
+export const Notes = ({ changeNoteHandler, state, moveNoteHandler, addNoteHandler, allPages, page, removeNoteHandler }) => {
   return (
-    <div className="notes">
-      <div className="page-heiding">
-        <NavLink to="/pages">
-          <img className="come-back" src={Arrow} alt="come back" />
+    <div className='notes'>
+      <div className='page-heiding'>
+        <NavLink to='/pages'>
+          <img className='come-back' src={Arrow} alt='come back' />
         </NavLink>
-        <h2 className="text-right">{page}</h2>
+        <h2 className='text-right'>{page}</h2>
       </div>
-      <input type="text" placeholder="Enter a note" className="form-control" onKeyDown={e => addNote(e, page)} />
+      <input type='text' placeholder='Enter a note' className='form-control' onKeyDown={e => addNoteHandler(e, page)} />
       <hr></hr>
-      <ul className="list-group">
+      <ul className='list-group'>
         {state[page].length ? (
           state[page].map(note => {
             return (
               <Note
-                changeNote={changeNote}
-                moveNote={moveNote}
+                changeNoteHandler={changeNoteHandler}
+                moveNoteHandler={moveNoteHandler}
                 allPages={allPages}
                 pageName={page}
                 key={note.id}
-                id={note.id}
+                noteId={note.id}
                 title={note.title}
                 done={note.done}
-                removeNote={removeNote}
-                toggleDone={toggleDone}
+                removeNoteHandler={removeNoteHandler}
               />
             )
           })
         ) : (
-          <h2 className="text-center">Page is empty...</h2>
+          <h2 className='text-center'>Page is empty...</h2>
         )}
       </ul>
     </div>

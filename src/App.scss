@@ -1,10 +1,3 @@
-.navbar {
-  height: 57px;
-  .logo {
-    color: aqua;
-  }
-}
-
 .close:focus {
   border: none;
   outline: none;
@@ -120,37 +113,4 @@ h2 {
   100% {
     transform: translateX(0);
   }
-}
-
-.alert-danger,
-.alert-success,
-.alert-warning {
-  position: absolute;
-  width: 50%;
-  left: 25%;
-  top: 80px;
-  @media (max-width: 1100px) {
-    width: 70%;
-    left: 15%;
-  }
-  @media (max-width: 500px) {
-    top: 61px;
-    width: 90%;
-    left: 5%;
-  }
-}
-
-.alert-enter {
-  opacity: 0;
-}
-.alert-enter-active {
-  opacity: 1;
-  transition: opacity 500ms;
-}
-.alert-exit {
-  opacity: 1;
-}
-.alert-exit-active {
-  opacity: 0;
-  transition: opacity 500ms;
 }
