@@ -14,7 +14,7 @@ function App() {
   const dispatch = useDispatch()
   const state = useSelector(state => state.state)
 
-  const [showAddPage, setShowAddPage] = useState(false)
+  const [showAddPage, setShowAddPage] = useState(true)
   const [showAlert, setShowAlert] = useState(false)
   const [alertContent, setAlertContent] = useState({
     type: 'success',
@@ -73,8 +73,6 @@ function App() {
   }
 
   const moveNoteHandler = (fromPage, toPage, noteId) => {
-    console.log(1)
-
     restartAlertsetTimeout()
     dispatch(moveNote({ fromPage, toPage, noteId }))
     setAlertContent({ type: 'success', title: 'Note moved' })
