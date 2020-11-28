@@ -40,7 +40,11 @@ export const Note = ({ setAlertContent, allPages, pageName, noteId, title, done 
             <button onClick={e => removeNoteHandler(pageName, noteId)} className='btn btn-outline-danger btn-sm'>
               &times;
             </button>
-            <button onClick={() => setShowDropdown(!showDropdown)} className='btn btn-primary btn-sm dropdownToggle'>
+            <button
+              onBlur={() => setShowDropdown(false)}
+              onClick={() => setShowDropdown(!showDropdown)}
+              className='btn btn-primary btn-sm dropdownToggle'
+            >
               <img src={Arrow} alt=':' />
               <Dropdown
                 setAlertContent={setAlertContent}
