@@ -5,14 +5,13 @@ import Arrow from '../../img/arrow.svg'
 import { useDispatch, useSelector } from 'react-redux'
 import { addNote } from '../../redux/reducer'
 
-export const Notes = ({ restartAlertsetTimeout, changeNoteHandler, setAlertContent, allPages, page }) => {
+export const Notes = ({ changeNoteHandler, setAlertContent, allPages, page }) => {
   const state = useSelector(state => state.state)
   const dispatch = useDispatch()
 
   const addNoteHandler = (e, pageName) => {
     const noteTitle = e.target.value.trim()
     if (e.key === 'Enter') {
-      restartAlertsetTimeout()
       if (e.target.value.trim()) {
         dispatch(addNote({ noteTitle, pageName }))
         e.target.value = ''
@@ -38,7 +37,6 @@ export const Notes = ({ restartAlertsetTimeout, changeNoteHandler, setAlertConte
           state[page].map(note => {
             return (
               <Note
-                restartAlertsetTimeout={restartAlertsetTimeout}
                 setAlertContent={setAlertContent}
                 changeNoteHandler={changeNoteHandler}
                 allPages={allPages}

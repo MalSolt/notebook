@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { CSSTransition } from 'react-transition-group'
 import './App.scss'
@@ -20,6 +20,9 @@ export function App() {
     }, 3000)
     setShowAlert(true)
   }
+  useEffect(() => {
+    alertContent.type && restartAlertsetTimeout()
+  }, [alertContent])
 
   return (
     <>
@@ -40,14 +43,8 @@ export function App() {
           {({ match }) => (
             <CSSTransition timeout={700} classNames='pages' in={match != null} unmountOnExit>
               <div className='absolute'>
-                {showAddPage && (
-                  <AddPage
-                    setShowAddPage={setShowAddPage}
-                    restartAlertsetTimeout={restartAlertsetTimeout}
-                    setAlertContent={setAlertContent}
-                  />
-                )}
-                <Pages setAlertContent={setAlertContent} restartAlertsetTimeout={restartAlertsetTimeout} />
+                {showAddPage && <AddPage setShowAddPage={setShowAddPage} setAlertContent={setAlertContent} />}
+                <Pages setAlertContent={setAlertContent} />
               </div>
             </CSSTransition>
           )}
@@ -57,12 +54,7 @@ export function App() {
             {({ match }) => (
               <CSSTransition timeout={700} classNames='page' in={match != null} unmountOnExit>
                 <div className='absolute'>
-                  <Notes
-                    setAlertContent={setAlertContent}
-                    restartAlertsetTimeout={restartAlertsetTimeout}
-                    allPages={Object.keys(state)}
-                    page={page}
-                  />
+                  <Notes setAlertContent={setAlertContent} allPages={Object.keys(state)} page={page} />
                 </div>
               </CSSTransition>
             )}

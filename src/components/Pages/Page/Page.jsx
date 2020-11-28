@@ -3,10 +3,9 @@ import { NavLink } from 'react-router-dom'
 import './Page.scss'
 import { useDispatch } from 'react-redux'
 import { removePage } from '../../../redux/reducer'
-export const Page = ({ pageName, restartAlertsetTimeout, setAlertContent }) => {
+export const Page = ({ pageName, setAlertContent }) => {
   const dispatch = useDispatch()
   const removePageHandler = pageName => {
-    restartAlertsetTimeout()
     dispatch(removePage(pageName))
     setAlertContent({ type: 'danger', title: 'Page deleted' })
   }

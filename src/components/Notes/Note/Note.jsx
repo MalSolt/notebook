@@ -7,13 +7,12 @@ import { removeNote, toggleDone } from '../../../redux/reducer'
 import { Dropdown } from './Dropdown'
 import { TitleEditMode } from './TitleEditMode'
 
-export const Note = ({ setAlertContent, allPages, pageName, noteId, title, done, restartAlertsetTimeout }) => {
+export const Note = ({ setAlertContent, allPages, pageName, noteId, title, done }) => {
   const [showDropdown, setShowDropdown] = useState(false)
   const [titleEditMode, setTitleEditMode] = useState(false)
   const dispatch = useDispatch()
 
   const removeNoteHandler = (pageName, noteId) => {
-    restartAlertsetTimeout()
     dispatch(removeNote({ pageName, noteId }))
     setAlertContent({ type: 'danger', title: 'Note deleted' })
   }
@@ -23,7 +22,6 @@ export const Note = ({ setAlertContent, allPages, pageName, noteId, title, done,
       {titleEditMode ? (
         <TitleEditMode
           setAlertContent={setAlertContent}
-          restartAlertsetTimeout={restartAlertsetTimeout}
           setTitleEditMode={setTitleEditMode}
           pageName={pageName}
           noteId={noteId}
@@ -46,7 +44,6 @@ export const Note = ({ setAlertContent, allPages, pageName, noteId, title, done,
               <img src={Arrow} alt=':' />
               <Dropdown
                 setAlertContent={setAlertContent}
-                restartAlertsetTimeout={restartAlertsetTimeout}
                 showDropdown={showDropdown}
                 allPages={allPages}
                 pageName={pageName}

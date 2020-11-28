@@ -2,11 +2,10 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addPage } from '../../redux/reducer'
 
-export const AddPage = ({ restartAlertsetTimeout, setAlertContent, setShowAddPage }) => {
+export const AddPage = ({ setAlertContent, setShowAddPage }) => {
   const dispatch = useDispatch()
   const state = useSelector(state => state.state)
   const addPageHandler = e => {
-    restartAlertsetTimeout()
     if (e.target.value.trim()) {
       if (Object.keys(state).some(page => page.toLowerCase() === e.target.value.replace(/ +/g, ' ').trim().toLowerCase())) {
         setAlertContent({ type: 'warning', title: 'page  exists' })
