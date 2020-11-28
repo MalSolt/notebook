@@ -3,11 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 const reducerSlice = createSlice({
   name: 'main',
   initialState: {
-    ['Покупки']: [
+    Покупки: [
       { id: 1, title: 'Купить хлеб', done: false },
       { id: 2, title: 'Купить молоко', done: false },
     ],
-    ['Домашние дела']: [
+    'Домашние дела': [
       { id: 3, title: 'Убраться в комнате', done: false },
       { id: 4, title: 'Помыть посуду', done: false },
     ],

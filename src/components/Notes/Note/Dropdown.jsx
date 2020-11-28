@@ -1,7 +1,15 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { moveNote } from '../../../redux/reducer'
 import './Note.scss'
 
-export const Dropdown = ({ moveNoteHandler, showDropdown, allPages, pageName, noteId }) => {
+export const Dropdown = ({ showDropdown, allPages, pageName, noteId, setAlertContent, restartAlertsetTimeout }) => {
+  const dispatch = useDispatch()
+  const moveNoteHandler = (fromPage, toPage, noteId) => {
+    restartAlertsetTimeout()
+    dispatch(moveNote({ fromPage, toPage, noteId }))
+    setAlertContent({ type: 'success', title: 'Note moved' })
+  }
   return (
     <>
       {showDropdown && (

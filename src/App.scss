@@ -64,7 +64,7 @@ h2 {
 
 @keyframes showRoute {
   0% {
-    transform: translateX(70%);
+    transform: translateX(30%);
   }
   100% {
     transform: translateX(0);
@@ -99,7 +99,7 @@ h2 {
 
 @keyframes showPagesRoute {
   0% {
-    transform: translateX(-70%);
+    transform: translateX(-30%);
   }
   100% {
     transform: translateX(0);

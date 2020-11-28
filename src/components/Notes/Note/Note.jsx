@@ -3,19 +3,27 @@ import './Note.scss'
 import Arrow from '../../../img/arrow.svg'
 import Edit from '../../../img/edit.svg'
 import { useDispatch } from 'react-redux'
-import { toggleDone } from '../../../redux/reducer'
+import { removeNote, toggleDone } from '../../../redux/reducer'
 import { Dropdown } from './Dropdown'
 import { TitleEditMode } from './TitleEditMode'
 
-export const Note = ({ changeNoteHandler, moveNoteHandler, allPages, pageName, noteId, title, done, removeNoteHandler }) => {
-  const dispatch = useDispatch()
+export const Note = ({ setAlertContent, allPages, pageName, noteId, title, done, restartAlertsetTimeout }) => {
   const [showDropdown, setShowDropdown] = useState(false)
   const [titleEditMode, setTitleEditMode] = useState(false)
+  const dispatch = useDispatch()
+
+  const removeNoteHandler = (pageName, noteId) => {
+    restartAlertsetTimeout()
+    dispatch(removeNote({ pageName, noteId }))
+    setAlertContent({ type: 'danger', title: 'Note deleted' })
+  }
+
   return (
     <li className='list-group-item'>
       {titleEditMode ? (
         <TitleEditMode
-          changeNoteHandler={changeNoteHandler}
+          setAlertContent={setAlertContent}
+          restartAlertsetTimeout={restartAlertsetTimeout}
           setTitleEditMode={setTitleEditMode}
           pageName={pageName}
           noteId={noteId}
@@ -37,7 +45,8 @@ export const Note = ({ changeNoteHandler, moveNoteHandler, allPages, pageName, n
             <button onClick={() => setShowDropdown(!showDropdown)} className='btn btn-primary btn-sm dropdownToggle'>
               <img src={Arrow} alt=':' />
               <Dropdown
-                moveNoteHandler={moveNoteHandler}
+                setAlertContent={setAlertContent}
+                restartAlertsetTimeout={restartAlertsetTimeout}
                 showDropdown={showDropdown}
                 allPages={allPages}
                 pageName={pageName}

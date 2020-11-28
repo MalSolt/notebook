@@ -1,0 +1,5 @@
+export { AddPage } from './AddPage/AddPage'
+export { Alert } from './Alert/Alert'
+export { Notes } from './Notes/Notes'
+export { Pages } from './Pages/Pages'
+export { Nav } from './Nav/Nav'

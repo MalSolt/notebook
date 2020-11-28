@@ -2,8 +2,27 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { Note } from './Note/Note'
 import Arrow from '../../img/arrow.svg'
+import { useDispatch, useSelector } from 'react-redux'
+import { addNote } from '../../redux/reducer'
 
-export const Notes = ({ changeNoteHandler, state, moveNoteHandler, addNoteHandler, allPages, page, removeNoteHandler }) => {
+export const Notes = ({ restartAlertsetTimeout, changeNoteHandler, setAlertContent, allPages, page }) => {
+  const state = useSelector(state => state.state)
+  const dispatch = useDispatch()
+
+  const addNoteHandler = (e, pageName) => {
+    const noteTitle = e.target.value.trim()
+    if (e.key === 'Enter') {
+      restartAlertsetTimeout()
+      if (e.target.value.trim()) {
+        dispatch(addNote({ noteTitle, pageName }))
+        e.target.value = ''
+        setAlertContent({ type: 'success', title: 'Note added' })
+      } else {
+        setAlertContent({ type: 'warning', title: 'Enter note title' })
+      }
+    }
+  }
+
   return (
     <div className='notes'>
       <div className='page-heiding'>
@@ -19,15 +38,15 @@ export const Notes = ({ changeNoteHandler, state, moveNoteHandler, addNoteHandle
           state[page].map(note => {
             return (
               <Note
+                restartAlertsetTimeout={restartAlertsetTimeout}
+                setAlertContent={setAlertContent}
                 changeNoteHandler={changeNoteHandler}
-                moveNoteHandler={moveNoteHandler}
                 allPages={allPages}
                 pageName={page}
                 key={note.id}
                 noteId={note.id}
                 title={note.title}
                 done={note.done}
-                removeNoteHandler={removeNoteHandler}
               />
             )
           })
